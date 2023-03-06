@@ -1,0 +1,36 @@
+.userItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e3fdfd;
+  margin-right: 0.5rem;
+  padding: 1.5rem 2.5rem;
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
+}
+.userItem:hover {
+  background-color: #cbf1f5;
+  transition: all 0.5s;
+}
+
+.userItem__name {
+  font-size: 1.75rem;
+  letter-spacing: 2px;
+}
+.userItem__age {
+  font-size: 1.5rem;
+}
+.userItem__age span {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Media Queries  */
+@media (max-width: 481px) {
+  .userItem__name {
+    font-size: 1rem;
+  }
+  .userItem__age {
+    font-size: 1rem;
+  }
+}
