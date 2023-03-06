@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/log_users_prac/static/css/main.a8a34bc7.css",
+    "main.js": "/log_users_prac/static/js/main.a91b09d7.js",
+    "index.html": "/log_users_prac/index.html",
+    "main.a8a34bc7.css.map": "/log_users_prac/static/css/main.a8a34bc7.css.map",
+    "main.a91b09d7.js.map": "/log_users_prac/static/js/main.a91b09d7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a8a34bc7.css",
+    "static/js/main.a91b09d7.js"
+  ]
+}
