@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import AlertModal from './AlertModal';
-import BackDrop from './BackDrop';
 import styles from './UserDetailForm.module.css'
-
+import ReactDOM from 'react-dom';
 function UserDetailForm(props) {
   const [name, setName] = useState('')
   const [age, setAge] = useState('')
@@ -41,9 +40,10 @@ function UserDetailForm(props) {
     setAge('')
     props.onAddUser({ id: Math.random().toString(), name, age })
   }
+
   return <div className={styles['user-details_container']}>
-    {shouldShowAlert && <AlertModal onAlertHandler={onAlertHandler} />}
-    {shouldShowAlert && <BackDrop />}
+    {shouldShowAlert &&
+      ReactDOM.createPortal(<AlertModal message='Please enter a valid name/age.' onAlertHandler={onAlertHandler} />, document.querySelector('body'))}
     <form className={styles['user-details-form']}>
       <div className={styles['user-details-control']}>
         <label htmlFor='name'>Username : </label>
