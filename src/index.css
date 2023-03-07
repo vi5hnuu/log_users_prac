@@ -9,6 +9,7 @@ html {
   box-sizing: border-box;
 }
 body {
+  position: relative;
   background-color: #71c9ce;
   padding: 2.5rem;
 }

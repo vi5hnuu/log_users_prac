@@ -51,6 +51,10 @@
   transition: all 0.5s;
 }
 
+.invalid,
+.invalid:focus {
+  border-bottom: 3px solid #f00 !important;
+}
 /* Media Queries  */
 @media (max-width: 800px) {
   .user-details_container {

@@ -1,18 +1,73 @@
+import { useState } from 'react';
+import AlertModal from './AlertModal';
+import BackDrop from './BackDrop';
 import styles from './UserDetailForm.module.css'
 
-function UserDetailForm() {
+function UserDetailForm(props) {
+  const [name, setName] = useState('')
+  const [age, setAge] = useState('')
+  const [shouldShowAlert, setShouldShowAlert] = useState(false)
+  const [validations, setValidations] = useState({ nameIsValid: true, ageIsValid: true })
+
+  function onNameChange(evnt) {
+    const uname = evnt.target.value
+    setValidations(oldValidations => {
+      return { ...oldValidations, nameIsValid: uname.length !== 0 }
+    })
+    setName(uname)
+  }
+
+  function onAgeChange(evnt) {
+    const uage = evnt.target.value
+    setValidations(oldValidations => {
+      return { ...oldValidations, ageIsValid: (+uage >= 18 && +uage <= 65) }
+    })
+    setAge(uage)
+  }
+
+  function onAlertHandler() {
+    setShouldShowAlert(false)
+  }
+  function onAddUserHandler(evnt) {
+    evnt.preventDefault()
+    const uname = name
+    const uage = age;
+    if (uname.length === 0 || !(+uage >= 18 && +uage <= 65)) {
+      setShouldShowAlert(true)
+      return;
+    }
+    setValidations({ nameIsValid: true, ageIsValid: true })
+    setName('')
+    setAge('')
+    props.onAddUser({ id: Math.random().toString(), name, age })
+  }
   return <div className={styles['user-details_container']}>
+    {shouldShowAlert && <AlertModal onAlertHandler={onAlertHandler} />}
+    {shouldShowAlert && <BackDrop />}
     <form className={styles['user-details-form']}>
       <div className={styles['user-details-control']}>
         <label htmlFor='name'>Username : </label>
-        <input type='text' id='name' maxLength='50' />
+        <input
+          onChange={onNameChange}
+          className={`${validations.nameIsValid ? "" : styles.invalid}`}
+          value={name}
+          type='text'
+          id='name'
+          maxLength='50'
+          placeholder='Vishnu kumar' />
       </div>
       <div className={styles['user-details-control']}>
         <label htmlFor='age'>Age(Years) : </label>
-        <input type='number' id='age' min='20' max='100' />
+        <input
+          onChange={onAgeChange}
+          className={`${validations.ageIsValid ? "" : styles.invalid}`}
+          value={age}
+          type='number'
+          id='age'
+          placeholder='21' />
       </div>
       <div className={styles['user-details-action']}>
-        <button type='submit' className={styles['btnAddUser']}>Log User</button>
+        <button onClick={onAddUserHandler} type='submit' className={styles['btnAddUser']}>Log User</button>
       </div>
     </form>
   </div>
